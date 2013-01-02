@@ -2,9 +2,20 @@ module Chillout
   class Brain
     def initialize
       @projects = {}
+      @users = {}
     end
-    def add_project(project_name)
-      @projects[project_name] = Project.new
+    def add_project(project_name, project)
+      @projects[project_name] = project
+
+    end
+
+    def add_ownership(user, project)
+      @users[user] ||= []
+      @users[user] << project
+    end
+
+    def projects(user)
+      @users[user]
     end
   end
 
@@ -19,6 +30,9 @@ module Chillout
     def total_exceptions_count
       @exceptions.length
     end
+  end
+
+  class User
   end
 
   class Exception
